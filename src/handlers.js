@@ -5,7 +5,7 @@ const notes = require('./notes');
 
 const handlers = {
   addNote: (req, h) => {
-    // Get data that sent by the client
+    // CREATE: Get data that sent by the client
     const { title, tags, body } = req.payload;
 
     // generate id
@@ -53,7 +53,13 @@ const handlers = {
       })
       .code(500);
   },
-  getAllNotes: (req, h) => '<h3>All Notes is here</h3>',
+  // READ: Handler to get all notes
+  getAllNotes: (req, h) => ({
+    status: 'success',
+    data: {
+      notes,
+    },
+  }),
 };
 
 module.exports = handlers;

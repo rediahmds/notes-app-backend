@@ -8,8 +8,9 @@ const routes = [
     handler: handlers.addNote,
   },
   {
+    // READ ALL NOTES
     method: 'GET',
-    path: '/',
+    path: '/notes',
     handler: handlers.getAllNotes,
   },
 ];
