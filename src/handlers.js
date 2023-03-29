@@ -1,16 +1,15 @@
 /* eslint-disable arrow-parens */
 // eslint-disable-next-line import/no-extraneous-dependencies
-const nanoid = require('nanoid');
+const { v4: uuidv4 } = require('uuid');
 const notes = require('./notes');
 
 const handlers = {
-  // Handler to Create new Note
   addNote: (req, h) => {
     // Get data that sent by the client
-    const { title, tags, body } = req.body;
+    const { title, tags, body } = req.payload;
 
     // generate id
-    const id = nanoid(16);
+    const id = uuidv4();
 
     // Set the date
     const createdAt = new Date().toISOString();
@@ -54,6 +53,7 @@ const handlers = {
       })
       .code(500);
   },
+  getAllNotes: (req, h) => '<h3>All Notes is here</h3>',
 };
 
 module.exports = handlers;

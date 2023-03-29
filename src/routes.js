@@ -7,6 +7,11 @@ const routes = [
     path: '/notes',
     handler: handlers.addNote,
   },
+  {
+    method: 'GET',
+    path: '/',
+    handler: handlers.getAllNotes,
+  },
 ];
 
 module.exports = routes;
