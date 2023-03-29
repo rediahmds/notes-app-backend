@@ -54,12 +54,24 @@ const handlers = {
       .code(500);
   },
   // READ: Handler to get all notes
-  getAllNotes: (req, h) => ({
+  getAllNotes: () => ({
     status: 'success',
     data: {
       notes,
     },
   }),
+  // READ: Handler to get specific note
+  getNote: (req, h) => {
+    const { id } = req.params;
+    const [foundNote] = notes.filter(n => n.id === id);
+    console.log(foundNote);
+    return {
+      status: 'success',
+      data: {
+        note: foundNote,
+      },
+    };
+  },
 };
 
 module.exports = handlers;

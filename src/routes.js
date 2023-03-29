@@ -13,6 +13,12 @@ const routes = [
     path: '/notes',
     handler: handlers.getAllNotes,
   },
+  // READ SPECIFIC NOTE (NOTE DETAIL)
+  {
+    method: 'GET',
+    path: '/notes/{id}',
+    handler: handlers.getNote,
+  },
 ];
 
 module.exports = routes;
