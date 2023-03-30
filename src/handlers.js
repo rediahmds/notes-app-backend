@@ -64,7 +64,17 @@ const handlers = {
   getNote: (req, h) => {
     const { id } = req.params;
     const [foundNote] = notes.filter(n => n.id === id);
-    console.log(foundNote);
+
+    // If note isn't exist
+    if (!foundNote) {
+      return h
+        .response({
+          status: 'fail',
+          message: 'Catatan tidak ditemukan',
+        })
+        .code(404);
+    }
+
     return {
       status: 'success',
       data: {
