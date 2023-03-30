@@ -82,6 +82,50 @@ const handlers = {
       },
     };
   },
+  updateNote: (req, h) => {
+    const { id } = req.params;
+    const { title, tags, body } = req.payload;
+    const updatedAt = new Date().toISOString();
+    const [originalNote] = notes.filter(note => note.id === id);
+    const originalNoteIndex = notes.findIndex(note => note.id === id);
+
+    // Define the updated note
+    const updatedNote = {
+      ...originalNote,
+      title,
+      tags,
+      body,
+      updatedAt,
+    };
+
+    // Replace old note with a new one
+    notes.splice(originalNoteIndex, 1, updatedNote);
+
+    // Check if the note is successfully updated
+    /*
+     * find the specified note then compare the update timestamp
+     * if the timestamp is different, then it's success updating
+     */
+    const isUpdateSucces =
+      notes.filter(note => note.id === id)[0].updatedAt !==
+      originalNote.updatedAt;
+
+    if (isUpdateSucces) {
+      return h
+        .response({
+          status: 'success',
+          message: 'Catatan berhasil diperbaharui! 🥳',
+        })
+        .code(200);
+    }
+
+    return h
+      .response({
+        status: 'fail',
+        message: 'Gagal memperbarui catatan. Id catatan tidak ditemukan',
+      })
+      .code(404);
+  },
 };
 
 module.exports = handlers;

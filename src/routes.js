@@ -19,6 +19,12 @@ const routes = [
     path: '/notes/{id}',
     handler: handlers.getNote,
   },
+  // UPDATE SPECIFIC NOTE
+  {
+    method: 'PUT',
+    path: '/notes/{id}',
+    handler: handlers.updateNote,
+  },
 ];
 
 module.exports = routes;
