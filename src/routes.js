@@ -25,6 +25,12 @@ const routes = [
     path: '/notes/{id}',
     handler: handlers.updateNote,
   },
+  // DELETE SPECIFIC NOTE
+  {
+    method: 'DELETE',
+    path: '/notes/{id}',
+    handler: handlers.deleteNote,
+  },
 ];
 
 module.exports = routes;

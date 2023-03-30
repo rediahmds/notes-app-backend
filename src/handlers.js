@@ -82,6 +82,7 @@ const handlers = {
       },
     };
   },
+  // UPDATE: Update / edit specific note
   updateNote: (req, h) => {
     const { id } = req.params;
     const { title, tags, body } = req.payload;
@@ -123,6 +124,34 @@ const handlers = {
       .response({
         status: 'fail',
         message: 'Gagal memperbarui catatan. Id catatan tidak ditemukan',
+      })
+      .code(404);
+  },
+  // DELETE: Delete specific note
+  deleteNote: (req, h) => {
+    const { id } = req.params;
+    const noteIndex = notes.findIndex(note => note.id === id);
+
+    // Removes the specified note
+    notes.splice(noteIndex, 1);
+
+    // Check if the note successfully removed
+    const isRemoved = !notes.find(note => note.id);
+
+    // If the note removed, then it's success
+    if (isRemoved) {
+      return h
+        .response({
+          status: 'success',
+          message: 'Catatan berhasil dihapus! 🥳',
+        })
+        .code(200);
+    }
+
+    return h
+      .response({
+        status: 'fail',
+        message: 'Catatan gagal dihapus. ID catatan tidak ditemukan! 🤔',
       })
       .code(404);
   },
