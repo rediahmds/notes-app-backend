@@ -107,9 +107,8 @@ const handlers = {
      * find the specified note then compare the update timestamp
      * if the timestamp is different, then it's success updating
      */
-    const isUpdateSucces =
-      notes.filter(note => note.id === id)[0].updatedAt !==
-      originalNote.updatedAt;
+    const isUpdateSucces = notes.filter(note => note.id === id)[0].updatedAt
+      !== originalNote.updatedAt;
 
     if (isUpdateSucces) {
       return h
