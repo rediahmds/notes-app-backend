@@ -133,13 +133,8 @@ const handlers = {
     const noteIndex = notes.findIndex(note => note.id === id);
 
     // Removes the specified note
-    notes.splice(noteIndex, 1);
-
-    // Check if the note successfully removed
-    const isRemoved = !notes.find(note => note.id);
-
-    // If the note removed, then it's success
-    if (isRemoved) {
+    if (noteIndex !== -1) {
+      notes.splice(noteIndex, 1);
       return h
         .response({
           status: 'success',
